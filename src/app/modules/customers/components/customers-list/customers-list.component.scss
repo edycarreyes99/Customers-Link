@@ -4,7 +4,9 @@
     width: 100%;
   }
 
-  td, th {
-    width: 25%;
+  .table-container {
+    position: relative;
+    min-height: 200px;
+    overflow: auto;
   }
 }

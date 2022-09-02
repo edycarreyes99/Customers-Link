@@ -13,6 +13,9 @@ import {StoreModule} from "@ngrx/store";
 import {customersReducer} from "./state/customers.reducer";
 import {EffectsModule} from "@ngrx/effects";
 import {CustomersEffect} from "./state/customers.effect";
+import {MatIconModule} from "@angular/material/icon";
+import {MatButtonModule} from "@angular/material/button";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 
 @NgModule({
@@ -29,7 +32,10 @@ import {CustomersEffect} from "./state/customers.effect";
     MatFormFieldModule,
     MatInputModule,
     StoreModule.forFeature('customers', customersReducer),
-    EffectsModule.forFeature([CustomersEffect])
+    EffectsModule.forFeature([CustomersEffect]),
+    MatIconModule,
+    MatButtonModule,
+    MatTooltipModule
   ]
 })
 
