@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {IndividualConfig, ToastrService} from "ngx-toastr";
-import {ERROR_TOAST, INFO_TOAST, SUCCESS_TOAST, WARNING_TOAST} from "../constants/toast.constants";
+import {ERROR_TOAST, INFO_TOAST, SUCCESS_TOAST, WARNING_TOAST} from "../../constants/toast.constants";
 
 @Injectable({
   providedIn: 'root'
