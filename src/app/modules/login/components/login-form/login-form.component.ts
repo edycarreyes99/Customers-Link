@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {ToastService} from "../../../../core/services/toast/toast.service";
 import {ERROR_TOAST, SUCCESS_TOAST} from "../../../../core/constants/toast.constants";
+import {NavigationService} from "../../../../core/services/navigation/navigation.service";
 
 @Component({
   selector: 'app-login-form',
@@ -18,6 +19,7 @@ export class LoginFormComponent implements OnInit {
 
   constructor(
     private toastService: ToastService,
+    private navigationService: NavigationService
   ) {
     this.loginForm = new FormGroup({
       email: new FormControl('', [
@@ -44,6 +46,7 @@ export class LoginFormComponent implements OnInit {
         if (email === 'test@test.com' && password === 'test') {
           this.toastService.showToast(SUCCESS_TOAST, 'Login', 'Login successful');
           console.log('Login successful');
+          await this.navigationService.navigate('customers');
           resolve(true);
         } else {
           this.toastService.showToast(ERROR_TOAST, 'Login Error', 'Invalid email or password');
