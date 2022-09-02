@@ -86,7 +86,7 @@ export class CustomersListComponent implements OnInit, AfterViewInit {
       dialogRef.afterClosed().subscribe(async (managedCustomer: ICustomer) => {
         if (managedCustomer) {
           if (dialogType === 'Delete') {
-            this.toastService.showToast(SUCCESS_TOAST, 'Customer Deleted', `Customer ${customer?.firstName} ${customer?.lastName} deleted successfully`);
+            this.toastService.showToast(SUCCESS_TOAST, 'Customer Deletion', `Customer ${customer?.firstName} ${customer?.lastName} deleted successfully`);
           }
           this.store.dispatch(invokeCustomersDataSource());
           resolve(managedCustomer);
