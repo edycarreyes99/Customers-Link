@@ -1,3 +1,80 @@
 <div class="customer-form">
-  <p>customer-form works!</p>
+  <form class="w-100" [formGroup]="customersForm">
+    <div class="row">
+      <div class="col-sm-12 col-md-6 col-lg-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>First Name</mat-label>
+          <input matInput formControlName="firstName">
+          <mat-hint
+            *ngIf="getControl('firstName')?.invalid && getControl('firstName')?.touched" class="error-hint">
+            First Name is invalid
+          </mat-hint>
+          <mat-hint
+            *ngIf="!getControl('firstName')?.invalid && getControl('firstName')?.errors?.required" class="error-hint">
+            First Name is required
+          </mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-6 col-lg-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Last Name</mat-label>
+          <input matInput formControlName="lastName">
+          <mat-hint
+            *ngIf="getControl('lastName')?.invalid && getControl('lastName')?.touched" class="error-hint">
+            Last Name is invalid
+          </mat-hint>
+          <mat-hint
+            *ngIf="!getControl('lastName')?.invalid && getControl('lastName')?.errors?.required" class="error-hint">
+            Last Name is required
+          </mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-6 col-lg-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status">
+            <mat-option value="active">Active</mat-option>
+            <mat-option value="pending">Pending</mat-option>
+            <mat-option value="inactive">Inactive</mat-option>
+          </mat-select>
+          <mat-hint
+            *ngIf="!getControl('status')?.invalid && getControl('status')?.errors?.required" class="error-hint">
+            Status is required
+          </mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div class="col-sm-12 col-md-6 col-lg-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email">
+          <mat-hint
+            *ngIf="getControl('email')?.invalid && getControl('email')?.touched" class="error-hint">
+            Email is invalid
+          </mat-hint>
+          <mat-hint
+            *ngIf="!getControl('email')?.invalid && getControl('email')?.errors?.required" class="error-hint">
+            Email is required
+          </mat-hint>
+        </mat-form-field>
+      </div>
+
+      <div class="col-12">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Phone</mat-label>
+          <input matInput formControlName="phone">
+          <mat-hint
+            *ngIf="getControl('phone')?.invalid && getControl('phone')?.touched" class="error-hint">
+            Phone is invalid
+          </mat-hint>
+          <mat-hint
+            *ngIf="!getControl('phone')?.invalid && getControl('phone')?.errors?.required" class="error-hint">
+            Phone is required
+          </mat-hint>
+        </mat-form-field>
+      </div>
+    </div>
+  </form>
 </div>
