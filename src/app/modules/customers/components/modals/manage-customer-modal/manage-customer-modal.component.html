@@ -1,21 +1,26 @@
 <div class="manage-customer-modal-component">
-  <h2 mat-dialog-title>{{data.dialogType}} Customer</h2>
+  <h2 mat-dialog-title>{{data.dialogType}}
+    Customer {{data.dialogType === 'View' ? ': ' + data.customer.firstName + ' ' + data.customer.lastName : ''}}</h2>
   <mat-dialog-content>
     <app-customer-form
       #customerForm
       [customer]="data.customer"
       (validForm)="isValidForm = $event"
-      (customerManaged)="dialogRef.close($event)">
+      (customerManaged)="dialogRef.close($event)"
+      [manageType]="data.dialogType.toLowerCase()">
     </app-customer-form>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
-    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-button mat-dialog-close>
+      {{data.dialogType === 'View' ? 'Close' : 'Cancel'}}
+    </button>
     <button
       mat-button
       [mat-dialog-close]="true"
       cdkFocusInitial
       [disabled]="!isValidForm"
-      (click)="manageCustomer()">
+      (click)="manageCustomer()"
+      *ngIf="data.dialogType !== 'View'">
       {{data.dialogType}}
     </button>
   </mat-dialog-actions>

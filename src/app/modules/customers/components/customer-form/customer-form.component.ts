@@ -23,6 +23,7 @@ export class CustomerFormComponent implements OnInit {
 
   // Component Variables
   customersForm: FormGroup;
+  viewCustomerMode = false;
 
   constructor(
     private store: Store,
@@ -64,6 +65,8 @@ export class CustomerFormComponent implements OnInit {
     this.customersForm.valueChanges.subscribe((value) => {
       this.validForm.emit(this.customersForm.valid);
     });
+
+    this.viewCustomerMode = this.manageType === 'view';
   }
 
   getControl(controlName: string): AbstractControl | null {

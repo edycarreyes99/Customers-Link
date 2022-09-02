@@ -4,7 +4,7 @@
       <div class="col-sm-12 col-md-6 col-lg-6">
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>First Name</mat-label>
-          <input matInput formControlName="firstName">
+          <input matInput formControlName="firstName" [readonly]="viewCustomerMode">
           <mat-hint
             *ngIf="getControl('firstName')?.invalid && getControl('firstName')?.touched" class="error-hint">
             First Name is invalid
@@ -19,7 +19,7 @@
       <div class="col-sm-12 col-md-6 col-lg-6">
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>Last Name</mat-label>
-          <input matInput formControlName="lastName">
+          <input matInput formControlName="lastName" [readonly]="viewCustomerMode">
           <mat-hint
             *ngIf="getControl('lastName')?.invalid && getControl('lastName')?.touched" class="error-hint">
             Last Name is invalid
@@ -34,7 +34,7 @@
       <div class="col-sm-12 col-md-6 col-lg-6">
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>Status</mat-label>
-          <mat-select formControlName="status">
+          <mat-select formControlName="status" [disabled]="viewCustomerMode">
             <mat-option value="active">Active</mat-option>
             <mat-option value="pending">Pending</mat-option>
             <mat-option value="inactive">Inactive</mat-option>
@@ -49,7 +49,7 @@
       <div class="col-sm-12 col-md-6 col-lg-6">
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>Email</mat-label>
-          <input matInput formControlName="email">
+          <input matInput formControlName="email" [readonly]="viewCustomerMode">
           <mat-hint
             *ngIf="getControl('email')?.invalid && getControl('email')?.touched" class="error-hint">
             Email is invalid
@@ -64,7 +64,7 @@
       <div class="col-12">
         <mat-form-field appearance="outline" class="w-100">
           <mat-label>Phone</mat-label>
-          <input matInput formControlName="phone">
+          <input matInput formControlName="phone" [readonly]="viewCustomerMode">
           <mat-hint
             *ngIf="getControl('phone')?.invalid && getControl('phone')?.touched" class="error-hint">
             Phone is invalid
