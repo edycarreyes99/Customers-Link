@@ -7,10 +7,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import {ToastrModule} from "ngx-toastr";
 import { EffectsModule } from '@ngrx/effects';
+import { NavbarComponent } from './core/components/navbar/navbar.component';
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconModule} from "@angular/material/icon";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -21,6 +26,9 @@ import { EffectsModule } from '@ngrx/effects';
     ToastrModule.forRoot({
       positionClass: 'toast-top-right'
     }),
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
