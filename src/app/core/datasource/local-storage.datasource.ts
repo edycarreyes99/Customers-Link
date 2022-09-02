@@ -22,11 +22,14 @@ export abstract class LocalStorageDatasource<M, S> implements ICRUD<M, S> {
     }
     let data: S[] = [];
 
+    body = {
+      ...body,
+      id: faker.datatype.uuid()
+    }
+
     this.index().subscribe((payload: S[]) => {
       data = payload;
     });
-
-    (body as any).id = faker.datatype.uuid();
 
     (data as any).push(body);
 
@@ -62,7 +65,9 @@ export abstract class LocalStorageDatasource<M, S> implements ICRUD<M, S> {
 
     const index = data.findIndex(d => (d as any).id === id);
 
-    data[index] = body;
+    data[index] = {
+      ...body
+    };
 
     this.poblate(data);
 
