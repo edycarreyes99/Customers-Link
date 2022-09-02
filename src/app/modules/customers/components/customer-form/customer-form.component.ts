@@ -2,6 +2,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/forms";
 import {faker} from "@faker-js/faker";
 import {ICustomer} from "../../interfaces/customer";
+import {Store} from "@ngrx/store";
+import {invokeSaveNewCustomers} from "../../state/customers.action";
 
 @Component({
   selector: 'app-customer-form',
@@ -15,12 +17,16 @@ export class CustomerFormComponent implements OnInit {
 
   // Output Variables
   @Output() validForm: EventEmitter<boolean>;
+  @Output() customerManaged: EventEmitter<ICustomer>;
 
   // Component Variables
   customersForm: FormGroup;
 
-  constructor() {
+  constructor(
+    private store: Store
+  ) {
     this.validForm = new EventEmitter<boolean>();
+    this.customerManaged = new EventEmitter<ICustomer>();
 
     this.customersForm = new FormGroup({
       id: new FormControl(faker.datatype.uuid(), [
@@ -63,7 +69,13 @@ export class CustomerFormComponent implements OnInit {
 
   async createCustomer(): Promise<ICustomer> {
     return new Promise<ICustomer>(async (resolve, rejects) => {
-
+      if (this.customersForm.valid) {
+        this.store.dispatch(invokeSaveNewCustomers({customer: this.customersForm.value}));
+        this.customerManaged.emit(this.customersForm.value);
+        resolve(this.customersForm.value);
+      } else {
+        rejects(new Error('Form is not valid'));
+      }
     });
   }
 

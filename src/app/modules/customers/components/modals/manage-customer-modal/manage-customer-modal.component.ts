@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
-import {MAT_DIALOG_DATA} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {CustomerFormComponent} from "../../customer-form/customer-form.component";
 
 
@@ -16,7 +16,8 @@ export class ManageCustomerModalComponent implements OnInit {
   isValidForm = false
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<ManageCustomerModalComponent>
   ) {
   }
 

@@ -11,6 +11,8 @@ import {CustomersService} from "../../services/customers.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ManageCustomerModalComponent} from "../modals/manage-customer-modal/manage-customer-modal.component";
 import {CustomerFormComponent} from "../customer-form/customer-form.component";
+import {ToastService} from "../../../../core/services/toast/toast.service";
+import {SUCCESS_TOAST} from "../../../../core/constants/toast.constants";
 
 @Component({
   selector: 'app-customers-list',
@@ -31,7 +33,8 @@ export class CustomersListComponent implements OnInit, AfterViewInit {
   constructor(
     private store: Store,
     private customersService: CustomersService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private toastService: ToastService
   ) {
     this.dataSource = new MatTableDataSource(this.customers);
   }
@@ -74,11 +77,11 @@ export class CustomersListComponent implements OnInit, AfterViewInit {
           dialogType: 'Create',
         }
       });
-      dialogRef.afterClosed().subscribe(async (result) => {
-        if (result) {
-          /*this.customersService.add(result);
-          this.store.dispatch(invokeCustomersDataSource());*/
-          resolve(result);
+      dialogRef.afterClosed().subscribe(async (customer: ICustomer) => {
+        if (customer) {
+          this.toastService.showToast(SUCCESS_TOAST, 'Customer Creation', `Customer ${customer.firstName} ${customer.lastName} created successfully!`);
+          this.store.dispatch(invokeCustomersDataSource());
+          resolve(customer);
         } else {
           rejects();
         }

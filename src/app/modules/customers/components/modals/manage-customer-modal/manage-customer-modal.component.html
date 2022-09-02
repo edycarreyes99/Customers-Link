@@ -3,7 +3,8 @@
   <mat-dialog-content>
     <app-customer-form
       #customerForm
-      (validForm)="isValidForm = $event">
+      (validForm)="isValidForm = $event"
+      (customerManaged)="dialogRef.close($event)">
     </app-customer-form>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
@@ -12,7 +13,8 @@
       mat-button
       [mat-dialog-close]="true"
       cdkFocusInitial
-      [disabled]="!isValidForm">
+      [disabled]="!isValidForm"
+      (click)="manageCustomer()">
       {{data.dialogType}}
     </button>
   </mat-dialog-actions>
