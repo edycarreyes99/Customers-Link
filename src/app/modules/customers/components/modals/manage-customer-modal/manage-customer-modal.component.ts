@@ -34,7 +34,7 @@ export class ManageCustomerModalComponent implements OnInit {
             break;
 
           case 'Edit':
-            console.log('Editing customer');
+            await this.customerForm?.updateCustomer();
             resolve();
             break;
 

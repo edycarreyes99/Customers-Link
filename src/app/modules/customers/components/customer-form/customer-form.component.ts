@@ -3,7 +3,7 @@ import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/form
 import {faker} from "@faker-js/faker";
 import {ICustomer} from "../../interfaces/customer";
 import {Store} from "@ngrx/store";
-import {invokeSaveNewCustomer} from "../../state/customers.action";
+import {invokeEditCustomer, invokeSaveNewCustomer} from "../../state/customers.action";
 
 @Component({
   selector: 'app-customer-form',
@@ -79,9 +79,10 @@ export class CustomerFormComponent implements OnInit {
     });
   }
 
-  async editCustomer(): Promise<ICustomer> {
+  async updateCustomer(): Promise<ICustomer> {
     return new Promise<ICustomer>(async (resolve, rejects) => {
       if (this.customersForm.valid) {
+        this.store.dispatch(invokeEditCustomer({customer: this.customersForm.value}));
         this.customerManaged.emit(this.customersForm.value);
         resolve(this.customersForm.value);
       } else {
