@@ -6,6 +6,11 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./modules/login/login.module').then((module) => module.LoginModule),
     // ToDo: Add canActivate guard
+  },
+  {
+    path: 'customers',
+    loadChildren: () => import('./modules/customers/customers.module').then((module) => module.CustomersModule),
+    // ToDo: Add canActivate guard
   }
 ];
 
