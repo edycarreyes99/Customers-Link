@@ -1,26 +1,30 @@
 import {ICRUD} from "../interfaces/crud";
 import {CUSTOMERS_LS} from "../constants/local-storage.constants";
 import {faker} from "@faker-js/faker";
+import {Observable, of} from "rxjs";
 
 export abstract class LocalStorageDatasource<M, S> implements ICRUD<M, S> {
 
   protected constructor() {
   }
 
-  index(): S[] {
+  index(): Observable<S[]> {
     if (!this.verifyIfDataSourceExists()) {
       this.poblate();
     }
 
-    return JSON.parse(localStorage.getItem(CUSTOMERS_LS)!) as S[];
+    return of(JSON.parse(localStorage.getItem(CUSTOMERS_LS)!));
   }
 
-  store(body: S): S {
+  store(body: S): Observable<S> {
     if (!this.verifyIfDataSourceExists()) {
       this.poblate();
     }
+    let data: S[] = [];
 
-    const data = this.index();
+    this.index().subscribe((payload: S[]) => {
+      data = payload;
+    });
 
     (body as any).id = faker.datatype.uuid();
 
@@ -28,23 +32,33 @@ export abstract class LocalStorageDatasource<M, S> implements ICRUD<M, S> {
 
     this.poblate(data);
 
-    return body;
+    return of(body);
   }
 
-  show(id: number | string): S | undefined {
+  show(id: number | string): Observable<S | undefined> {
     if (!this.verifyIfDataSourceExists()) {
       this.poblate();
     }
 
-    return this.index().find(d => (d as any).id === id);
+    let find: S | undefined;
+
+    this.index().subscribe((payload: S[]) => {
+      find = payload.find(d => (d as any).id === id);
+    });
+
+    return of(find);
   }
 
-  update(id: number | string, body: S): S {
+  update(id: number | string, body: S): Observable<S> {
     if (!this.verifyIfDataSourceExists()) {
       this.poblate();
     }
 
-    const data = this.index();
+    let data: S[] = [];
+
+    this.index().subscribe((payload: S[]) => {
+      data = payload;
+    });
 
     const index = data.findIndex(d => (d as any).id === id);
 
@@ -52,15 +66,19 @@ export abstract class LocalStorageDatasource<M, S> implements ICRUD<M, S> {
 
     this.poblate(data);
 
-    return body;
+    return of(body);
   }
 
-  delete(id: number | string): S {
+  delete(id: number | string): Observable<S> {
     if (!this.verifyIfDataSourceExists()) {
       this.poblate();
     }
 
-    const data = this.index();
+    let data: S[] = [];
+
+    this.index().subscribe((payload: S[]) => {
+      data = payload;
+    });
 
     const index = data.findIndex(d => (d as any).id === id);
 
@@ -70,7 +88,7 @@ export abstract class LocalStorageDatasource<M, S> implements ICRUD<M, S> {
 
     this.poblate(data);
 
-    return deleted;
+    return of(deleted);
   }
 
   poblate(data?: S[]): void {
