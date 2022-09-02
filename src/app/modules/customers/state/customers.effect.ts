@@ -5,7 +5,7 @@ import {select, Store} from "@ngrx/store";
 import {
   customersFetchDataSourceSuccess,
   invokeCustomersDataSource,
-  invokeSaveNewCustomers,
+  invokeSaveNewCustomer,
   saveNewCustomerSuccess
 } from "./customers.action";
 import {EMPTY, map, mergeMap, switchMap, withLatestFrom} from "rxjs";
@@ -37,7 +37,7 @@ export class CustomersEffect {
 
   saveNewCustomer$ = createEffect(() => {
     return this.actions$.pipe(
-      ofType(invokeSaveNewCustomers),
+      ofType(invokeSaveNewCustomer),
       switchMap((action) => {
         return this.customersService.store(action.customer).pipe(
           map((customer) => saveNewCustomerSuccess({customer}))

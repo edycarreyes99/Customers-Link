@@ -5,7 +5,7 @@
         <button
           class="mt-sm-0 mt-md-1 mt-lg-1"
           mat-stroked-button
-          (click)="openCreateCustomerModal()">
+          (click)="openManageCustomerModal('Create')">
           Create Customer
         </button>
       </div>
@@ -62,11 +62,13 @@
           <th mat-header-cell *matHeaderCellDef> Actions</th>
           <td mat-cell *matCellDef="let row">
             <div class="d-flex justify-content-between">
-              <button mat-icon-button matTooltip="View Customer" class="text-secondary">
+              <button mat-icon-button matTooltip="View Customer" class="text-secondary"
+                      (click)="openManageCustomerModal('View', row)">
                 <mat-icon>visibility</mat-icon>
               </button>
 
-              <button mat-icon-button matTooltip="Edit Customer" class="text-secondary">
+              <button mat-icon-button matTooltip="Edit Customer" class="text-secondary"
+                      (click)="openManageCustomerModal('Edit', row)">
                 <mat-icon>edit</mat-icon>
               </button>
 

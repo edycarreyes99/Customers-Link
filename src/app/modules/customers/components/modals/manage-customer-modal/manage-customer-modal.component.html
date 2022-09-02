@@ -3,6 +3,7 @@
   <mat-dialog-content>
     <app-customer-form
       #customerForm
+      [customer]="data.customer"
       (validForm)="isValidForm = $event"
       (customerManaged)="dialogRef.close($event)">
     </app-customer-form>

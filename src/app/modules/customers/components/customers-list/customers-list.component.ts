@@ -68,20 +68,21 @@ export class CustomersListComponent implements OnInit, AfterViewInit {
     }
   }
 
-  openCreateCustomerModal(): Promise<ICustomer> {
+  openManageCustomerModal(dialogType: 'Create' | 'View' | 'Edit', customer?: ICustomer): Promise<ICustomer> {
     return new Promise<ICustomer>(async (resolve, rejects) => {
       const dialogRef = this.dialog.open(ManageCustomerModalComponent, {
         width: '600px',
         disableClose: true,
         data: {
-          dialogType: 'Create',
+          dialogType,
+          customer
         }
       });
-      dialogRef.afterClosed().subscribe(async (customer: ICustomer) => {
-        if (customer) {
-          this.toastService.showToast(SUCCESS_TOAST, 'Customer Creation', `Customer ${customer.firstName} ${customer.lastName} created successfully!`);
+      dialogRef.afterClosed().subscribe(async (managedCustomer: ICustomer) => {
+        if (managedCustomer) {
+          this.toastService.showToast(SUCCESS_TOAST, 'Customer Creation', `Customer ${managedCustomer.firstName} ${managedCustomer.lastName} created successfully!`);
           this.store.dispatch(invokeCustomersDataSource());
-          resolve(customer);
+          resolve(managedCustomer);
         } else {
           rejects();
         }
