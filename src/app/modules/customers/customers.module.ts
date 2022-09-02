@@ -21,6 +21,7 @@ import { CustomerFormComponent } from './components/customer-form/customer-form.
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
 import {MatDialogModule} from "@angular/material/dialog";
+import { DeleteCustomerModalComponent } from './components/modals/delete-customer-modal/delete-customer-modal.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import {MatDialogModule} from "@angular/material/dialog";
     CustomersViewComponent,
     CustomersListComponent,
     ManageCustomerModalComponent,
-    CustomerFormComponent
+    CustomerFormComponent,
+    DeleteCustomerModalComponent
   ],
   imports: [
     CommonModule,
@@ -49,9 +51,11 @@ import {MatDialogModule} from "@angular/material/dialog";
   ],
   providers: [
     ManageCustomerModalComponent,
+    DeleteCustomerModalComponent
   ],
   entryComponents: [
-    ManageCustomerModalComponent
+    ManageCustomerModalComponent,
+    DeleteCustomerModalComponent
   ]
 })
 
