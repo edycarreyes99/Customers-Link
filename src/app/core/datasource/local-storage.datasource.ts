@@ -1,13 +1,10 @@
-import {HttpClient} from '@angular/common/http';
 import {ICRUD} from "../interfaces/crud";
 import {CUSTOMERS_LS} from "../constants/local-storage.constants";
 import {faker} from "@faker-js/faker";
 
 export abstract class LocalStorageDatasource<M, S> implements ICRUD<M, S> {
 
-  protected constructor(
-    protected http: HttpClient
-  ) {
+  protected constructor() {
   }
 
   index(): S[] {
