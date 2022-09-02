@@ -21,7 +21,7 @@ export class CustomersService extends LocalStorageDatasource<ICustomer[], ICusto
         lastName: faker.name.lastName(),
         status: 'active',
         email: faker.internet.email(),
-        phone: faker.phone.phoneNumber(),
+        phone: faker.phone.number(),
       }
 
       customers.push(customer);

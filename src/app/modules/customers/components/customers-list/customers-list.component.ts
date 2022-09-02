@@ -10,6 +10,7 @@ import {merge, startWith} from "rxjs";
 import {CustomersService} from "../../services/customers.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ManageCustomerModalComponent} from "../modals/manage-customer-modal/manage-customer-modal.component";
+import {CustomerFormComponent} from "../customer-form/customer-form.component";
 
 @Component({
   selector: 'app-customers-list',
@@ -64,10 +65,11 @@ export class CustomersListComponent implements OnInit, AfterViewInit {
     }
   }
 
-  addCustomer(): Promise<ICustomer> {
+  openCreateCustomerModal(): Promise<ICustomer> {
     return new Promise<ICustomer>(async (resolve, rejects) => {
       const dialogRef = this.dialog.open(ManageCustomerModalComponent, {
         width: '600px',
+        disableClose: true,
         data: {
           dialogType: 'Create',
         }
