@@ -1,13 +1,13 @@
 <div class="manage-customer-modal-component">
   <h2 mat-dialog-title>{{dialogData.dialogType}}
-    Customer {{dialogData.dialogType === 'View' ? ': ' + dialogData?.customer?.firstName + ' ' + dialogData?.customer?.lastName : ''}}</h2>
+    Customer {{dialogData.dialogType === 'View' ? ': ' + dialogData.customer?.firstName + ' ' + dialogData.customer?.lastName : ''}}</h2>
   <mat-dialog-content>
     <app-customer-form
       #customerForm
       [customer]="dialogData.customer!"
       (validForm)="isValidForm = $event"
       (customerManaged)="dialogRef.close($event)"
-      [manageType]="dialogData!.dialogType!.toLowerCase()">
+      [manageType]="dialogData.dialogType!.toLowerCase()">
     </app-customer-form>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
