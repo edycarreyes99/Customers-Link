@@ -5,6 +5,10 @@ import {AuthenticatedGuard} from "./core/guards/authenticated/authenticated.guar
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'login'
+  },
+  {
     path: 'login',
     loadChildren: () => import('./modules/login/login.module').then((module) => module.LoginModule),
     canActivate: [NoAuthenticatedGuard]
