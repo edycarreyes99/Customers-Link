@@ -10,8 +10,6 @@ import {CustomersService} from "../../services/customers.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ManageCustomerModalComponent} from "../modals/manage-customer-modal/manage-customer-modal.component";
 import {DeleteCustomerModalComponent} from "../modals/delete-customer-modal/delete-customer-modal.component";
-import {ToastService} from "../../../../core/services/toast/toast.service";
-import {SUCCESS_TOAST} from "../../../../core/constants/toast.constants";
 
 @Component({
   selector: 'app-customers-list',
@@ -32,8 +30,7 @@ export class CustomersListComponent implements OnInit, AfterViewInit {
   constructor(
     private store: Store,
     private customersService: CustomersService,
-    public dialog: MatDialog,
-    private toastService: ToastService
+    public dialog: MatDialog
   ) {
     this.dataSource = new MatTableDataSource(this.customers);
   }
@@ -85,9 +82,6 @@ export class CustomersListComponent implements OnInit, AfterViewInit {
       });
       dialogRef.afterClosed().subscribe(async (managedCustomer: ICustomer) => {
         if (managedCustomer) {
-          if (dialogType === 'Delete') {
-            this.toastService.showToast(SUCCESS_TOAST, 'Customer Deletion', `Customer ${customer?.firstName} ${customer?.lastName} deleted successfully`);
-          }
           this.store.dispatch(invokeCustomersDataSource());
           resolve(managedCustomer);
         } else {
