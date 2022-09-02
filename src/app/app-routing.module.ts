@@ -1,16 +1,18 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
+import {NoAuthenticatedGuard} from "./core/guards/no-authenticated/no-authenticated.guard";
+import {AuthenticatedGuard} from "./core/guards/authenticated/authenticated.guard";
 
 const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./modules/login/login.module').then((module) => module.LoginModule),
-    // ToDo: Add canActivate guard
+    canActivate: [NoAuthenticatedGuard]
   },
   {
     path: 'customers',
     loadChildren: () => import('./modules/customers/customers.module').then((module) => module.CustomersModule),
-    // ToDo: Add canActivate guard
+    canActivate: [AuthenticatedGuard]
   }
 ];
 
@@ -18,4 +20,5 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}
