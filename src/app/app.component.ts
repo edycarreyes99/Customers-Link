@@ -21,12 +21,10 @@ export class AppComponent implements OnInit {
       if (event instanceof NavigationEnd) {
         switch (event.url) {
           case '/login' : {
-            console.log('Hide navbar?: true')
             this.hideNavbar = true;
             break;
           }
           default : {
-            console.log('Hide navbar?: false')
             this.hideNavbar = false;
           }
         }

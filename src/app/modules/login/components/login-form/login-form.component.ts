@@ -3,6 +3,7 @@ import {AbstractControl, FormControl, FormGroup, Validators} from "@angular/form
 import {ToastService} from "../../../../core/services/toast/toast.service";
 import {ERROR_TOAST, SUCCESS_TOAST} from "../../../../core/constants/toast.constants";
 import {NavigationService} from "../../../../core/services/navigation/navigation.service";
+import {USER_SIGNED_IN_LS} from "../../../../core/constants/local-storage.constants";
 
 @Component({
   selector: 'app-login-form',
@@ -45,7 +46,7 @@ export class LoginFormComponent implements OnInit {
         const password = this.loginForm.get('password')?.value;
         if (email === 'test@test.com' && password === 'test') {
           this.toastService.showToast(SUCCESS_TOAST, 'Login', 'Login successful');
-          console.log('Login successful');
+          localStorage.setItem(USER_SIGNED_IN_LS, this.loginForm.get('email')?.value);
           await this.navigationService.navigate('customers');
           resolve(true);
         } else {
