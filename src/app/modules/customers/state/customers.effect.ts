@@ -3,8 +3,12 @@ import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {CustomersService} from "../services/customers.service";
 import {select, Store} from "@ngrx/store";
 import {
-  customersFetchDataSourceSuccess, editCustomerSuccess,
-  invokeCustomersDataSource, invokeEditCustomer,
+  customersFetchDataSourceSuccess,
+  deleteCustomerSuccess,
+  editCustomerSuccess,
+  invokeCustomersDataSource,
+  invokeDeleteCustomer,
+  invokeEditCustomer,
   invokeSaveNewCustomer,
   saveNewCustomerSuccess
 } from "./customers.action";
@@ -52,6 +56,17 @@ export class CustomersEffect {
       switchMap((action) => {
         return this.customersService.update(action.customer.id, action.customer).pipe(
           map((customer) => editCustomerSuccess({customer}))
+        )
+      })
+    )
+  });
+
+  deleteCustomer$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(invokeDeleteCustomer),
+      switchMap((action) => {
+        return this.customersService.delete(action.customer.id).pipe(
+          map(() => deleteCustomerSuccess({customer: action.customer}))
         )
       })
     )
