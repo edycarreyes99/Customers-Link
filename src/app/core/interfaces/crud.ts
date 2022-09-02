@@ -11,4 +11,5 @@ export interface ICRUD<M, S> {
 
   delete(id: number | string): S;
 
+  poblate(data: M[]): void;
 }
