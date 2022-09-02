@@ -60,4 +60,9 @@ export class CustomersListComponent implements OnInit, AfterViewInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  addCustomer(): Promise<ICustomer> {
+    return new Promise<ICustomer>(async (resolve, rejects) => {
+    })
+  }
 }

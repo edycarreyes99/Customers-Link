@@ -1,9 +1,22 @@
 <div class="customer-list-component container">
   <div class="card p-4 shadow">
-    <mat-form-field appearance="outline">
-      <mat-label>Search Customer</mat-label>
-      <input matInput (keyup)="searchCustomer($event)" placeholder="Ex. Mia" #input>
-    </mat-form-field>
+    <div class="row">
+      <div class="col-sm-12 col-md-2 col-lg-2">
+        <button
+          class="mt-sm-0 mt-md-1 mt-lg-1"
+          mat-stroked-button
+          (click)="addCustomer()">
+          Add Customer
+        </button>
+      </div>
+
+      <div class="col-sm-12 col-md-10 col-lg-10">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Search Customer</mat-label>
+          <input matInput (keyup)="searchCustomer($event)" placeholder="Ex. Mia" #input>
+        </mat-form-field>
+      </div>
+    </div>
 
     <div class="table-container">
       <table mat-table [dataSource]="dataSource" matSort>
