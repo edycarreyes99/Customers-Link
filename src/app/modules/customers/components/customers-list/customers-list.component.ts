@@ -8,6 +8,8 @@ import {selectCustomers} from "../../state/customers.selector";
 import {invokeCustomersDataSource} from "../../state/customers.action";
 import {merge, startWith} from "rxjs";
 import {CustomersService} from "../../services/customers.service";
+import {MatDialog} from "@angular/material/dialog";
+import {ManageCustomerModalComponent} from "../modals/manage-customer-modal/manage-customer-modal.component";
 
 @Component({
   selector: 'app-customers-list',
@@ -27,7 +29,8 @@ export class CustomersListComponent implements OnInit, AfterViewInit {
 
   constructor(
     private store: Store,
-    private customersService: CustomersService
+    private customersService: CustomersService,
+    public dialog: MatDialog
   ) {
     this.dataSource = new MatTableDataSource(this.customers);
   }
@@ -63,6 +66,21 @@ export class CustomersListComponent implements OnInit, AfterViewInit {
 
   addCustomer(): Promise<ICustomer> {
     return new Promise<ICustomer>(async (resolve, rejects) => {
+      const dialogRef = this.dialog.open(ManageCustomerModalComponent, {
+        width: '600px',
+        data: {
+          dialogType: 'Create',
+        }
+      });
+      dialogRef.afterClosed().subscribe(async (result) => {
+        if (result) {
+          /*this.customersService.add(result);
+          this.store.dispatch(invokeCustomersDataSource());*/
+          resolve(result);
+        } else {
+          rejects();
+        }
+      }).unsubscribe();
     })
   }
 }

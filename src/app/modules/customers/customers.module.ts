@@ -20,6 +20,7 @@ import {ManageCustomerModalComponent} from './components/modals/manage-customer-
 import { CustomerFormComponent } from './components/customer-form/customer-form.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatSelectModule} from "@angular/material/select";
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 @NgModule({
@@ -43,10 +44,11 @@ import {MatSelectModule} from "@angular/material/select";
     MatButtonModule,
     MatTooltipModule,
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule
   ],
   providers: [
-    ManageCustomerModalComponent
+    ManageCustomerModalComponent,
   ],
   entryComponents: [
     ManageCustomerModalComponent
