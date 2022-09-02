@@ -24,7 +24,7 @@ export class NavbarComponent implements OnInit {
     const currentUser = localStorage.getItem(USER_SIGNED_IN_LS) ?? '';
     localStorage.removeItem(USER_SIGNED_IN_LS);
     this.navigationService.navigate('login');
-    this.toastSetvice.showToast(SUCCESS_TOAST, 'Logout', `${currentUser} logged out. Welcome back!`);
+    this.toastSetvice.showToast(SUCCESS_TOAST, 'Logout', `${currentUser} logged out. Back Soon!`);
   }
 
 }

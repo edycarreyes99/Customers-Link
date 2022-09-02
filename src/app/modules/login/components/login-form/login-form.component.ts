@@ -45,7 +45,7 @@ export class LoginFormComponent implements OnInit {
         const email = this.loginForm.get('email')?.value;
         const password = this.loginForm.get('password')?.value;
         if (email === 'test@test.com' && password === 'test') {
-          this.toastService.showToast(SUCCESS_TOAST, 'Login', 'Login successful');
+          this.toastService.showToast(SUCCESS_TOAST, 'Login', `Login successful. Welcome back, ${email}!`);
           localStorage.setItem(USER_SIGNED_IN_LS, this.loginForm.get('email')?.value);
           await this.navigationService.navigate('customers');
           resolve(true);
