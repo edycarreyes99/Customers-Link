@@ -1,6 +1,11 @@
 import {ICustomer} from "../interfaces/customer";
 import {createReducer, on} from "@ngrx/store";
-import {customersFetchDataSourceSuccess, editCustomerSuccess, saveNewCustomerSuccess} from "./customers.action";
+import {
+  customersFetchDataSourceSuccess,
+  deleteCustomerSuccess,
+  editCustomerSuccess,
+  saveNewCustomerSuccess
+} from "./customers.action";
 
 export const initialState: ReadonlyArray<ICustomer> = [];
 
@@ -12,5 +17,6 @@ export const customersReducer = createReducer(
     let newState = state.filter((_) => _.id !== customer.id);
     newState.unshift(customer);
     return newState;
-  })
+  }),
+  on(deleteCustomerSuccess, (state, {customer}) => [...state.filter((_) => _.id !== customer.id)])
 );
