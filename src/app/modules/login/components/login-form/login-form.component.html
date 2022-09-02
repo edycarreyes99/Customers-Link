@@ -1,3 +1,31 @@
-<div class="login-form-component">
-  <p>login-form works!</p>
+<div class="login-form-component d-flex flex-column align-items-center justify-content-center align-items-lg-start justify-content-lg-start">
+  <h1 class="mt-5 ms-3 app-title">
+    Log in
+  </h1>
+  <form [formGroup]="loginForm" class="form-signing mt-5 w-100">
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Email</mat-label>
+      <input formControlName="email" matInput placeholder="Enter your email">
+      <mat-hint
+        *ngIf="email?.invalid && email?.touched" class="error-hint">Email is invalid
+      </mat-hint>
+      <mat-hint
+        *ngIf="!email?.invalid && email?.errors?.required" class="error-hint">Email is required
+      </mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="w-100">
+      <mat-label>Password</mat-label>
+      <input formControlName="password" matInput
+             placeholder="Enter your password" type="{{passwordVisible ? 'text' : 'password'}}">
+      <mat-icon (click)="passwordVisible = !passwordVisible" *ngIf="!passwordVisible" matSuffix>visibility</mat-icon>
+      <mat-icon (click)="passwordVisible = !passwordVisible" *ngIf="passwordVisible" matSuffix>visibility_off</mat-icon>
+      <mat-hint
+        *ngIf="password?.touched && password?.errors?.required" class="error-hint">Password is required
+      </mat-hint>
+    </mat-form-field>
+  </form>
+  <button type="submit" (click)="doLogin()" class="w-100 btn btn-lg btn-primary mt-4 fw-bold py-3">
+    Log in
+  </button>
 </div>
