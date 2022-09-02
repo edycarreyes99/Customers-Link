@@ -17,13 +17,15 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {ManageCustomerModalComponent} from './components/modals/manage-customer-modal/manage-customer-modal.component';
+import { CustomerFormComponent } from './components/customer-form/customer-form.component';
 
 
 @NgModule({
   declarations: [
     CustomersViewComponent,
     CustomersListComponent,
-    ManageCustomerModalComponent
+    ManageCustomerModalComponent,
+    CustomerFormComponent
   ],
   imports: [
     CommonModule,
