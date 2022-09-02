@@ -20,10 +20,11 @@ export class AppComponent implements OnInit {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
         switch (event.url) {
-          case '/login' : {
+          case '/login' :
+          case '/':
+          case '':
             this.hideNavbar = true;
             break;
-          }
           default : {
             this.hideNavbar = false;
           }
