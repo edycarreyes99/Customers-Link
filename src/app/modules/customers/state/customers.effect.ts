@@ -2,9 +2,8 @@ import {Injectable} from "@angular/core";
 import {Actions, createEffect, ofType} from "@ngrx/effects";
 import {CustomersService} from "../services/customers.service";
 import {select, Store} from "@ngrx/store";
-import {ICustomer} from "../interfaces/customer";
 import {customersFetchDataSourceSuccess, invokeCustomersDataSource} from "./customers.action";
-import {EMPTY, map, mergeMap, withLatestFrom} from "rxjs";
+import {map, mergeMap, withLatestFrom} from "rxjs";
 import {selectCustomers} from "./customers.selector";
 
 @Injectable()
