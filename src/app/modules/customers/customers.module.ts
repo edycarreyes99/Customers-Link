@@ -16,12 +16,14 @@ import {CustomersEffect} from "./state/customers.effect";
 import {MatIconModule} from "@angular/material/icon";
 import {MatButtonModule} from "@angular/material/button";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {ManageCustomerModalComponent} from './components/modals/manage-customer-modal/manage-customer-modal.component';
 
 
 @NgModule({
   declarations: [
     CustomersViewComponent,
-    CustomersListComponent
+    CustomersListComponent,
+    ManageCustomerModalComponent
   ],
   imports: [
     CommonModule,
@@ -36,6 +38,12 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     MatIconModule,
     MatButtonModule,
     MatTooltipModule
+  ],
+  providers: [
+    ManageCustomerModalComponent
+  ],
+  entryComponents: [
+    ManageCustomerModalComponent
   ]
 })
 
