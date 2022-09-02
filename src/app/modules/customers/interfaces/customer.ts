@@ -1,5 +1,5 @@
 export interface ICustomer {
-  id: number;
+  id: string;
   firstName: string;
   lastName: string;
   status: 'active' | 'pending' | 'inactive';
