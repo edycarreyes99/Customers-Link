@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { StoreModule } from '@ngrx/store';
 import {ToastrModule} from "ngx-toastr";
+import { EffectsModule } from '@ngrx/effects';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,7 @@ import {ToastrModule} from "ngx-toastr";
     AppRoutingModule,
     BrowserAnimationsModule,
     StoreModule.forRoot({}, {}),
+    EffectsModule.forRoot([]),
     ToastrModule.forRoot({
       positionClass: 'toast-top-right'
     }),
