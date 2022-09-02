@@ -1,6 +1,7 @@
 import {Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {CustomerFormComponent} from "../../customer-form/customer-form.component";
+import {ICustomer} from "../../../interfaces/customer";
 
 
 @Component({
@@ -16,7 +17,7 @@ export class ManageCustomerModalComponent implements OnInit {
   isValidForm = false
 
   constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    @Inject(MAT_DIALOG_DATA) public dialogData: { dialogType: 'View' | 'Create' | 'Edit', customer: ICustomer | undefined },
     public dialogRef: MatDialogRef<ManageCustomerModalComponent>
   ) {
   }
@@ -27,7 +28,7 @@ export class ManageCustomerModalComponent implements OnInit {
   async manageCustomer(): Promise<void> {
     return new Promise<void>(async (resolve, rejects) => {
       if (this.isValidForm) {
-        switch (this.data.dialogType) {
+        switch (this.dialogData.dialogType) {
           case 'Create':
             await this.customerForm?.createCustomer();
             resolve();

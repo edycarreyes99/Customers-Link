@@ -9,6 +9,9 @@ import {invokeCustomersDataSource} from "../../state/customers.action";
 import {CustomersService} from "../../services/customers.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ManageCustomerModalComponent} from "../modals/manage-customer-modal/manage-customer-modal.component";
+import {DeleteCustomerModalComponent} from "../modals/delete-customer-modal/delete-customer-modal.component";
+import {ToastService} from "../../../../core/services/toast/toast.service";
+import {SUCCESS_TOAST} from "../../../../core/constants/toast.constants";
 
 @Component({
   selector: 'app-customers-list',
@@ -29,7 +32,8 @@ export class CustomersListComponent implements OnInit, AfterViewInit {
   constructor(
     private store: Store,
     private customersService: CustomersService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private toastService: ToastService
   ) {
     this.dataSource = new MatTableDataSource(this.customers);
   }
@@ -63,9 +67,15 @@ export class CustomersListComponent implements OnInit, AfterViewInit {
     }
   }
 
-  openManageCustomerModal(dialogType: 'Create' | 'View' | 'Edit', customer?: ICustomer): Promise<ICustomer> {
+  openManageCustomerModal(dialogType: 'Create' | 'View' | 'Edit' | 'Delete', customer?: ICustomer): Promise<ICustomer> {
     return new Promise<ICustomer>(async (resolve, rejects) => {
-      const dialogRef = this.dialog.open(ManageCustomerModalComponent, {
+      const dialogRef = dialogType === 'Delete' ? this.dialog.open(DeleteCustomerModalComponent, {
+        width: '600px',
+        disableClose: true,
+        data: {
+          customer
+        }
+      }) : this.dialog.open(ManageCustomerModalComponent, {
         width: '600px',
         disableClose: true,
         data: {
@@ -75,6 +85,9 @@ export class CustomersListComponent implements OnInit, AfterViewInit {
       });
       dialogRef.afterClosed().subscribe(async (managedCustomer: ICustomer) => {
         if (managedCustomer) {
+          if (dialogType === 'Delete') {
+            this.toastService.showToast(SUCCESS_TOAST, 'Customer Deleted', `Customer ${customer?.firstName} ${customer?.lastName} deleted successfully`);
+          }
           this.store.dispatch(invokeCustomersDataSource());
           resolve(managedCustomer);
         } else {

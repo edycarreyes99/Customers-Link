@@ -72,7 +72,8 @@
                 <mat-icon>edit</mat-icon>
               </button>
 
-              <button mat-icon-button matTooltip="Delete Customer" class="text-secondary">
+              <button mat-icon-button matTooltip="Delete Customer" class="text-secondary"
+                      (click)="openManageCustomerModal('Delete', row)">
                 <mat-icon>delete</mat-icon>
               </button>
             </div>

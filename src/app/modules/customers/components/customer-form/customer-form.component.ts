@@ -14,7 +14,7 @@ import {SUCCESS_TOAST} from "../../../../core/constants/toast.constants";
 })
 export class CustomerFormComponent implements OnInit {
   // Input Variables
-  @Input() manageType: 'edit' | 'view' | 'create' = 'create';
+  @Input() manageType: 'edit' | 'view' | 'create' | string = 'create';
   @Input() customer: ICustomer | undefined;
 
   // Output Variables
