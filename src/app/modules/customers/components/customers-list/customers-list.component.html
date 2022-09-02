@@ -10,7 +10,7 @@
 
         <!-- ID Column -->
         <ng-container matColumnDef="id">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> ID</th>
+          <th mat-header-cell *matHeaderCellDef> ID</th>
           <td mat-cell *matCellDef="let row"> {{row.id | slice: 0: 8}} </td>
         </ng-container>
 
@@ -34,19 +34,19 @@
 
         <!-- Email Column -->
         <ng-container matColumnDef="email">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Email</th>
+          <th mat-header-cell *matHeaderCellDef> Email</th>
           <td mat-cell *matCellDef="let row"> {{row.email}} </td>
         </ng-container>
 
         <!-- Phone Column -->
         <ng-container matColumnDef="phone">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Phone</th>
+          <th mat-header-cell *matHeaderCellDef> Phone</th>
           <td mat-cell *matCellDef="let row"> {{row.phone}} </td>
         </ng-container>
 
         <!-- Actions Column -->
         <ng-container matColumnDef="actions">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> Actions</th>
+          <th mat-header-cell *matHeaderCellDef> Actions</th>
           <td mat-cell *matCellDef="let row">
             <div class="d-flex justify-content-between">
               <button mat-icon-button matTooltip="View Customer" class="text-secondary">

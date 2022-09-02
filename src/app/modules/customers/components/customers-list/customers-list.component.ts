@@ -41,7 +41,6 @@ export class CustomersListComponent implements OnInit, AfterViewInit {
       this.dataSource.paginator = this.paginator ?? null;
 
       if (customers.length === 0) {
-        console.log('Customers list is empty');
         this.customersService.poblate(this.customersService.generateFakeData());
         this.store.dispatch(invokeCustomersDataSource());
       }
