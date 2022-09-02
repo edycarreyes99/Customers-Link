@@ -4,6 +4,8 @@ import {faker} from "@faker-js/faker";
 import {ICustomer} from "../../interfaces/customer";
 import {Store} from "@ngrx/store";
 import {invokeEditCustomer, invokeSaveNewCustomer} from "../../state/customers.action";
+import {ToastService} from "../../../../core/services/toast/toast.service";
+import {SUCCESS_TOAST} from "../../../../core/constants/toast.constants";
 
 @Component({
   selector: 'app-customer-form',
@@ -23,7 +25,8 @@ export class CustomerFormComponent implements OnInit {
   customersForm: FormGroup;
 
   constructor(
-    private store: Store
+    private store: Store,
+    private toastService: ToastService
   ) {
     this.validForm = new EventEmitter<boolean>();
     this.customerManaged = new EventEmitter<ICustomer>();
@@ -70,9 +73,11 @@ export class CustomerFormComponent implements OnInit {
   async createCustomer(): Promise<ICustomer> {
     return new Promise<ICustomer>(async (resolve, rejects) => {
       if (this.customersForm.valid) {
-        this.store.dispatch(invokeSaveNewCustomer({customer: this.customersForm.value}));
-        this.customerManaged.emit(this.customersForm.value);
-        resolve(this.customersForm.value);
+        const customer: ICustomer = this.customersForm.value;
+        this.store.dispatch(invokeSaveNewCustomer({customer}));
+        this.customerManaged.emit(customer);
+        this.toastService.showToast(SUCCESS_TOAST, 'Customer Creation', `Customer ${customer.firstName} ${customer.lastName} created successfully!`);
+        resolve(customer);
       } else {
         rejects(new Error('Form is not valid'));
       }
@@ -82,9 +87,11 @@ export class CustomerFormComponent implements OnInit {
   async updateCustomer(): Promise<ICustomer> {
     return new Promise<ICustomer>(async (resolve, rejects) => {
       if (this.customersForm.valid) {
-        this.store.dispatch(invokeEditCustomer({customer: this.customersForm.value}));
-        this.customerManaged.emit(this.customersForm.value);
-        resolve(this.customersForm.value);
+        const customer: ICustomer = this.customersForm.value;
+        this.store.dispatch(invokeEditCustomer({customer}));
+        this.customerManaged.emit(customer);
+        this.toastService.showToast(SUCCESS_TOAST, 'Customer Edition', `Customer ${customer.firstName} ${customer.lastName} updated successfully!`);
+        resolve(customer);
       } else {
         rejects(new Error('Form is not valid'));
       }
